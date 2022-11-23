@@ -1,0 +1,4 @@
+en:
+  site_settings:
+    uce_enabled: "User Custom CSV Export Enabled?"
+    uce_abstract_api_key_for_bulk_assign: "abstract api key for bulk assign"

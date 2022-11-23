@@ -1,0 +1,7 @@
+plugins:
+  uce_enabled:
+    default: true
+    client: true
+  uce_abstract_api_key_for_bulk_assign:
+    default: ''
+    client: true
