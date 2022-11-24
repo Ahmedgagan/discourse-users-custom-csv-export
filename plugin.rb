@@ -7,7 +7,7 @@
 
 gem 'geocoder', '1.7.3', require: true
 
-enabled_site_setting :nationalflag_enabled
+enabled_site_setting :uce_enabled
 
 after_initialize do
 end
