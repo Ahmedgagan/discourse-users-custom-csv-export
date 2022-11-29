@@ -50,8 +50,7 @@ def assign_country
         user.custom_fields['nationalflag_iso'] = country.downcase
         user.save_custom_fields
       end
+      sleep(1)
     end
-
-    sleep(1)
   end
 end
