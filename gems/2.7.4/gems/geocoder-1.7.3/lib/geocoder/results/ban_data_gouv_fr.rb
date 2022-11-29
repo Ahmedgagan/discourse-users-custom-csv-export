@@ -1,4 +1,5 @@
 # encoding: utf-8
+# frozen_string_literal: true
 require 'geocoder/results/base'
 
 module Geocoder::Result
@@ -57,7 +58,7 @@ module Geocoder::Result
 
     def coordinates
       coords = geometry["coordinates"]
-      return [coords[1].to_f, coords[0].to_f]
+      [coords[1].to_f, coords[0].to_f]
     end
 
     #### PROPERTIES ####

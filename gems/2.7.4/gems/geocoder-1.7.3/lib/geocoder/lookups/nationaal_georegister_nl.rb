@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require "geocoder/results/nationaal_georegister_nl"
 
@@ -25,13 +26,13 @@ module Geocoder::Lookup
 
     def results(query)
       return [] unless doc = fetch_data(query)
-      return doc['response']['docs']
+      doc['response']['docs']
     end
 
     def query_url_params(query)
       {
         fl: '*',
-        q:  query.text
+        q: query.text
       }.merge(super)
     end
   end

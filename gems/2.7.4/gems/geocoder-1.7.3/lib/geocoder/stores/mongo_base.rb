@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Geocoder::Store
   module MongoBase
 
@@ -29,7 +30,7 @@ module Geocoder::Store
     # (or other as specified in +geocoded_by+). Returns coordinates (array).
     #
     def geocode
-      do_lookup(false) do |o,rs|
+      do_lookup(false) do |o, rs|
         if r = rs.first
           unless r.coordinates.nil?
             o.__send__ "#{self.class.geocoder_options[:coordinates]}=", r.coordinates.reverse
@@ -44,7 +45,7 @@ module Geocoder::Store
     # in +reverse_geocoded_by+). Returns address (string).
     #
     def reverse_geocode
-      do_lookup(true) do |o,rs|
+      do_lookup(true) do |o, rs|
         if r = rs.first
           unless r.address.nil?
             o.__send__ "#{self.class.geocoder_options[:fetched_address]}=", r.address
@@ -55,4 +56,3 @@ module Geocoder::Store
     end
   end
 end
-

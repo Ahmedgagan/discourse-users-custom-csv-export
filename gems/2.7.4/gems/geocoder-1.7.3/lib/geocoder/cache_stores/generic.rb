@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/cache_stores/base'
 
 module Geocoder::CacheStore

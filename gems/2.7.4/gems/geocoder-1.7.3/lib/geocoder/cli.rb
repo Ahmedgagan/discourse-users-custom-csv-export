@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder'
 require 'optparse'
 
@@ -10,41 +11,41 @@ module Geocoder
 
       # remove arguments that are probably coordinates so they are not
       # processed as arguments (eg: -31.96047031,115.84274631)
-      coords = args.select{ |i| i.match(/^-\d/) }
+      coords = args.select { |i| i.match(/^-\d/) }
       args -= coords
 
-      OptionParser.new{ |opts|
+      OptionParser.new { |opts|
         opts.banner = "Usage:\n    geocode [options] <location>"
         opts.separator "\nOptions: "
 
         opts.on("-k <key>", "--key <key>",
           "Key for geocoding API (usually optional). Enclose multi-part keys in quotes and separate parts by spaces") do |key|
           if (key_parts = key.split(/\s+/)).size > 1
-            Geocoder.configure(:api_key => key_parts)
+            Geocoder.configure(api_key: key_parts)
           else
-            Geocoder.configure(:api_key => key)
+            Geocoder.configure(api_key: key)
           end
         end
 
         opts.on("-l <language>", "--language <language>",
           "Language of output (see API docs for valid choices)") do |language|
-          Geocoder.configure(:language => language)
+          Geocoder.configure(language: language)
         end
 
         opts.on("-p <proxy>", "--proxy <proxy>",
           "HTTP proxy server to use (user:pass@host:port)") do |proxy|
-          Geocoder.configure(:http_proxy => proxy)
+          Geocoder.configure(http_proxy: proxy)
         end
 
         opts.on("-s <service>", Geocoder::Lookup.all_services_except_test, "--service <service>",
           "Geocoding service: #{Geocoder::Lookup.all_services_except_test * ', '}") do |service|
-          Geocoder.configure(:lookup => service.to_sym)
-          Geocoder.configure(:ip_lookup => service.to_sym)
+          Geocoder.configure(lookup: service.to_sym)
+          Geocoder.configure(ip_lookup: service.to_sym)
         end
 
         opts.on("-t <seconds>", "--timeout <seconds>",
           "Maximum number of seconds to wait for API response") do |timeout|
-          Geocoder.configure(:timeout => timeout.to_i)
+          Geocoder.configure(timeout: timeout.to_i)
         end
 
         opts.on("-j", "--json", "Print API's raw JSON response") do
@@ -79,7 +80,7 @@ module Geocoder
         exit 1
       end
 
-      if show_url and show_json
+      if show_url && show_json
         out << "You can only specify one of -j and -u.\n"
         exit 2
       end

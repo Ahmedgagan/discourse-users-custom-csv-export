@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/stores/base'
 require 'geocoder/stores/mongo_base'
 

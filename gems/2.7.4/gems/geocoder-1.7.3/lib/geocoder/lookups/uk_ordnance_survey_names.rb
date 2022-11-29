@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require 'geocoder/results/uk_ordnance_survey_names'
 
@@ -29,7 +30,7 @@ module Geocoder::Lookup
     def results(query)
       return [] unless doc = fetch_data(query)
       return [] if doc['header']['totalresults'].zero?
-      return doc['results'].map { |r| r['GAZETTEER_ENTRY'] }
+      doc['results'].map { |r| r['GAZETTEER_ENTRY'] }
     end
 
     def query_url_params(query)

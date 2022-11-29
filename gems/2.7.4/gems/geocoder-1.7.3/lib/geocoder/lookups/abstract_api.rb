@@ -1,4 +1,5 @@
 # encoding: utf-8
+# frozen_string_literal: true
 
 require 'geocoder/lookups/base'
 require 'geocoder/results/abstract_api'
@@ -25,7 +26,7 @@ module Geocoder::Lookup
     end
 
     def query_url_params(query)
-      params = {api_key: configuration.api_key}
+      params = { api_key: configuration.api_key }
 
       ip_address = query.sanitized_text
       if ip_address.is_a?(String) && ip_address.length > 0

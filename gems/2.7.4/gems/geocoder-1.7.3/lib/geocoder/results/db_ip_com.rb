@@ -1,10 +1,11 @@
+# frozen_string_literal: true
 require 'geocoder/results/base'
 
 module Geocoder::Result
   class DbIpCom < Base
 
     def coordinates
-      ['latitude', 'longitude'].map{ |coordinate_name| @data[coordinate_name] }
+      ['latitude', 'longitude'].map { |coordinate_name| @data[coordinate_name] }
     end
 
     def city

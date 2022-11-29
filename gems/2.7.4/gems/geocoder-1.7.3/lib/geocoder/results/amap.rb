@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/results/base'
 
 module Geocoder::Result
@@ -31,11 +32,11 @@ module Geocoder::Result
 
     def street
       if address_components["neighborhood"]["name"] != []
-        return address_components["neighborhood"]["name"]
+        address_components["neighborhood"]["name"]
       elsif address_components['township'] != []
-        return address_components["township"]
+        address_components["township"]
       else
-        return @data['street'] || address_components['streetNumber'].try(:[], 'street')
+        @data['street'] || address_components['streetNumber'].try(:[], 'street')
       end
     end
 

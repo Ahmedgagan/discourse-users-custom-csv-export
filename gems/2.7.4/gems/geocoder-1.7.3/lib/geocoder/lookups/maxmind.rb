@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require 'geocoder/results/maxmind'
 require 'csv'
@@ -19,8 +20,8 @@ module Geocoder::Lookup
     # Return the name of the configured service, or raise an exception.
     #
     def configured_service!
-      if s = configuration[:service] and services.keys.include?(s)
-        return s
+      if (s = configuration[:service]) && services.keys.include?(s)
+        s
       else
         raise(
           Geocoder::ConfigurationError,
@@ -49,10 +50,10 @@ module Geocoder::Lookup
     #
     def services
       {
-        :country => "a",
-        :city => "b",
-        :city_isp_org => "f",
-        :omni => "e"
+        country: "a",
+        city: "b",
+        city_isp_org: "f",
+        omni: "e"
       }
     end
 
@@ -60,14 +61,14 @@ module Geocoder::Lookup
       # don't look up a loopback or private address, just return the stored result
       return [reserved_result] if query.internal_ip_address?
       doc = fetch_data(query)
-      if doc and doc.is_a?(Array)
+      if doc && doc.is_a?(Array)
         if !data_contains_error?(doc)
           return [doc]
         elsif doc.last == "INVALID_LICENSE_KEY"
           raise_error(Geocoder::InvalidApiKey) || Geocoder.log(:warn, "Invalid MaxMind API key.")
         end
       end
-      return []
+      []
     end
 
     def parse_raw_data(raw_data)
@@ -82,8 +83,8 @@ module Geocoder::Lookup
 
     def query_url_params(query)
       {
-        :l => configuration.api_key,
-        :i => query.sanitized_text
+        l: configuration.api_key,
+        i: query.sanitized_text
       }.merge(super)
     end
   end

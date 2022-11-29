@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require 'geocoder/results/here'
 
@@ -25,7 +26,7 @@ module Geocoder::Lookup
     def results(query)
       return [] unless doc = fetch_data(query)
       return [] unless doc['Response'] && doc['Response']['View']
-      if r=doc['Response']['View']
+      if r = doc['Response']['View']
         return [] if r.nil? || !r.is_a?(Array) || r.empty?
         return r.first['Result']
       end
@@ -48,7 +49,7 @@ module Geocoder::Lookup
       end
 
       unless (mapview = query.options[:bounds]).nil?
-        options[:mapview] = mapview.map{ |point| "%f,%f" % point }.join(';')
+        options[:mapview] = mapview.map { |point| "%f,%f" % point }.join(';')
       end
       options
     end

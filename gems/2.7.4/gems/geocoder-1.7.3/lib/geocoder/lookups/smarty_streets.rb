@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require 'geocoder/results/smarty_streets'
 
@@ -58,10 +59,10 @@ module Geocoder::Lookup
 
     def results(query)
       doc = fetch_data(query) || []
-      if doc.is_a?(Hash) and doc.key?('status') # implies there's an error
-        return []
+      if doc.is_a?(Hash) && doc.key?('status') # implies there's an error
+        []
       else
-        return doc
+        doc
       end
     end
   end

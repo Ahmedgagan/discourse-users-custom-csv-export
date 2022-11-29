@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require "geocoder/results/nominatim"
 
@@ -47,12 +48,12 @@ module Geocoder::Lookup
 
     def query_url_params(query)
       params = {
-        :format => "json",
-        :addressdetails => "1",
-        :"accept-language" => (query.language || configuration.language)
+        format: "json",
+        addressdetails: "1",
+        "accept-language": (query.language || configuration.language)
       }.merge(super)
       if query.reverse_geocode?
-        lat,lon = query.coordinates
+        lat, lon = query.coordinates
         params[:lat] = lat
         params[:lon] = lon
       else

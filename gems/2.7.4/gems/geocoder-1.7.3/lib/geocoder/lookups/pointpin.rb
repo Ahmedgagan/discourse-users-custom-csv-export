@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require 'geocoder/results/pointpin'
 
@@ -26,7 +27,7 @@ module Geocoder::Lookup
       # don't look up a loopback or private address, just return the stored result
       return [] if query.internal_ip_address?
       doc = fetch_data(query)
-      if doc and doc.is_a?(Hash)
+      if doc && doc.is_a?(Hash)
         if !data_contains_error?(doc)
           return [doc]
         elsif doc['error']
@@ -43,7 +44,7 @@ module Geocoder::Lookup
         end
       end
 
-      return []
+      []
     end
 
     def data_contains_error?(parsed_data)
@@ -53,14 +54,14 @@ module Geocoder::Lookup
     # TODO: replace this hash with what's actually returned by Pointpin
     def reserved_result(ip)
       {
-        "ip"           => ip,
-        "city"         => "",
-        "region_code"  => "",
-        "region_name"  => "",
-        "metrocode"    => "",
-        "zipcode"      => "",
-        "latitude"     => "0",
-        "longitude"    => "0",
+        "ip" => ip,
+        "city" => "",
+        "region_code" => "",
+        "region_name" => "",
+        "metrocode" => "",
+        "zipcode" => "",
+        "latitude" => "0",
+        "longitude" => "0",
         "country_name" => "Reserved",
         "country_code" => "RD"
       }

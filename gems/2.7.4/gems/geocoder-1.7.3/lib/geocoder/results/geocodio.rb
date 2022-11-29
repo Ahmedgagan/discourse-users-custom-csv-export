@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/results/base'
 
 module Geocoder::Result
@@ -57,7 +58,7 @@ module Geocoder::Result
     end
 
     def coordinates
-      ['lat', 'lng'].map{ |i| location[i].to_f } if location
+      ['lat', 'lng'].map { |i| location[i].to_f } if location
     end
 
     def accuracy

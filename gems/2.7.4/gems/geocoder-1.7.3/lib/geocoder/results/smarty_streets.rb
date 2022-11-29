@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 
 module Geocoder::Result
@@ -25,7 +26,7 @@ module Geocoder::Result
             last_line
           ]
         end
-      parts.select{ |i| i.to_s != "" }.join(" ")
+      parts.select { |i| i.to_s != "" }.join(" ")
     end
 
     def state

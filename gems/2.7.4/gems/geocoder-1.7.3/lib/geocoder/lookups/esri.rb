@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require "geocoder/results/esri"
 require 'geocoder/esri_token'
@@ -9,9 +10,9 @@ module Geocoder::Lookup
       "Esri"
     end
 
-      def supported_protocols
-        [:https]
-      end
+    def supported_protocols
+      [:https]
+    end
 
     private # ---------------------------------------------------------------
 
@@ -28,16 +29,16 @@ module Geocoder::Lookup
       end
 
       if (doc['error'].nil?)
-        return [ doc ]
+        [ doc ]
       else
-        return []
+        []
       end
     end
 
     def query_url_params(query)
       params = {
-        :f => "pjson",
-        :outFields => "*"
+        f: "pjson",
+        outFields: "*"
       }
       if query.reverse_geocode?
         params[:location] = query.coordinates.reverse.join(',')
@@ -66,10 +67,10 @@ module Geocoder::Lookup
 
     def token(query)
       token_instance = if query.options[:token]
-                         query.options[:token]
+        query.options[:token]
                        else
                          configuration[:token]
-                       end
+      end
 
       if !valid_token_configured?(token_instance) && configuration.api_key
         token_instance = create_and_save_token!(query)

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Geocoder
   class ConfigurationHash < Hash
     def method_missing(meth, *args, &block)

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rails/generators/migration'
 require 'generators/geocoder/migration_version'
 
@@ -19,7 +20,7 @@ module Geocoder
         def self.next_migration_number(dirname)
           if ActiveRecord::Base.timestamped_migrations
             sleep 1 # make sure each time we get a different timestamp
-            Time.new.utc.strftime("%Y%m%d%H%M%S")
+            Time.zone.now.utc.strftime("%Y%m%d%H%M%S")
           else
             "%.3d" % (current_migration_number(dirname) + 1)
           end

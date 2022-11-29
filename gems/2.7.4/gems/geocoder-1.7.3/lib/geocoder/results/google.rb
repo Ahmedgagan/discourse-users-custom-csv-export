@@ -1,10 +1,11 @@
+# frozen_string_literal: true
 require 'geocoder/results/base'
 
 module Geocoder::Result
   class Google < Base
 
     def coordinates
-      ['lat', 'lng'].map{ |i| geometry['location'][i] }
+      ['lat', 'lng'].map { |i| geometry['location'][i] }
     end
 
     def address(format = :full)
@@ -26,7 +27,7 @@ module Geocoder::Result
           return entity['long_name']
         end
       end
-      return nil # no appropriate components found
+      nil # no appropriate components found
     end
 
     def state
@@ -110,7 +111,7 @@ module Geocoder::Result
     #   :postal_code
     #
     def address_components_of_type(type)
-      address_components.select{ |c| c['types'].include?(type.to_s) }
+      address_components.select { |c| c['types'].include?(type.to_s) }
     end
 
     def geometry

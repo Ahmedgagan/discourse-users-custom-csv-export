@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/results/base'
 
 module Geocoder::Result
@@ -63,7 +64,7 @@ module Geocoder::Result
     end
 
     def try_to_extract(key, hash)
-      if hash.is_a?(Hash) and hash.include?(key)
+      if hash.is_a?(Hash) && hash.include?(key)
         hash[key]
       end
     end

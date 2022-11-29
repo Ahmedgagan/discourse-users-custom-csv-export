@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'ipaddr'
 
 module Geocoder
@@ -105,7 +106,7 @@ module Geocoder
         end
         ips << valid_ip.to_s if valid_ip
       end
-      return ips.any? ? ips : ip_addresses
+      ips.any? ? ips : ip_addresses
     end
   end
 end

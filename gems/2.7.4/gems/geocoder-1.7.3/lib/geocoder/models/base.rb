@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Geocoder
 
   ##
@@ -10,9 +11,9 @@ module Geocoder
         if defined?(@geocoder_options)
           @geocoder_options
         elsif superclass.respond_to?(:geocoder_options)
-          superclass.geocoder_options || { }
+          superclass.geocoder_options || {}
         else
-          { }
+          {}
         end
       end
 

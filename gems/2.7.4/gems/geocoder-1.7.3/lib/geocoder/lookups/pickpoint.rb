@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require "geocoder/lookups/nominatim"
 require "geocoder/results/pickpoint"
 

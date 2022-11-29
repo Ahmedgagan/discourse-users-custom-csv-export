@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'cgi'
 require 'geocoder/lookups/base'
 require "geocoder/results/mapquest"
@@ -25,7 +26,7 @@ module Geocoder::Lookup
     end
 
     def query_url_params(query)
-      params = { :location => query.sanitized_text }
+      params = { location: query.sanitized_text }
       if key = configuration.api_key
         params[:key] = CGI.unescape(key)
       end

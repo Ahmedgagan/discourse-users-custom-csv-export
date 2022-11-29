@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Geocoder::CacheStore
   class Base
     def initialize(store, options)
@@ -22,9 +23,15 @@ module Geocoder::CacheStore
 
     protected # ----------------------------------------------------------------
 
-    def prefix; @prefix; end
-    def store; @store; end
-    def config; @config; end
+    def prefix
+      @prefix
+    end
+    def store
+      @store
+    end
+    def config
+      @config
+    end
 
     ##
     # Cache key for a given URL.

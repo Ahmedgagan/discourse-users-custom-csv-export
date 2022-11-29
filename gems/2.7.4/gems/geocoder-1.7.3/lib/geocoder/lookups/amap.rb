@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require "geocoder/results/amap"
 
@@ -37,13 +38,13 @@ module Geocoder::Lookup
         raise_error(Geocoder::Error, "server error.") ||
           warn("#{self.name} Geocoding API error: server error - [#{doc['info']}]")
       end
-      return []
+      []
     end
 
     def query_url_params(query)
       params = {
-        :key => configuration.api_key,
-        :output => "json"
+        key: configuration.api_key,
+        output: "json"
       }
       if query.reverse_geocode?
         params[:location] = revert_coordinates(query.text)
@@ -56,7 +57,7 @@ module Geocoder::Lookup
     end
 
     def revert_coordinates(text)
-      [text[1],text[0]].join(",")
+      [text[1], text[0]].join(",")
     end
 
   end

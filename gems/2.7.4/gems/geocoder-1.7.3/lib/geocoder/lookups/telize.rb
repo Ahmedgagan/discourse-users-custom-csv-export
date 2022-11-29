@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require 'geocoder/results/telize'
 
@@ -36,7 +37,7 @@ module Geocoder::Lookup
     def results(query)
       # don't look up a loopback or private address, just return the stored result
       return [reserved_result(query.text)] if query.internal_ip_address?
-      if (doc = fetch_data(query)).nil? or doc['code'] == 401 or empty_result?(doc)
+      if (doc = fetch_data(query)).nil? || (doc['code'] == 401) || empty_result?(doc)
         []
       else
         [doc]

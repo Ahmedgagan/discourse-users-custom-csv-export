@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# frozen_string_literal: true
 require 'geocoder/sql'
 require 'geocoder/stores/base'
 
@@ -40,7 +41,7 @@ module Geocoder::Store
         # (see Geocoder::Store::ActiveRecord::ClassMethods.near_scope_options
         # for details).
         #
-        scope :near, lambda{ |location, *args|
+        scope :near, lambda { |location, *args|
           latitude, longitude = Geocoder::Calculations.extract_coordinates(location)
           if Geocoder::Calculations.coordinates_present?(latitude, longitude)
             options = near_scope_options(latitude, longitude, *args)
@@ -60,7 +61,7 @@ module Geocoder::Store
         # corner followed by the northeast corner of the box
         # (<tt>[[sw_lat, sw_lon], [ne_lat, ne_lon]]</tt>).
         #
-        scope :within_bounding_box, lambda{ |*bounds|
+        scope :within_bounding_box, lambda { |*bounds|
           sw_lat, sw_lng, ne_lat, ne_lng = bounds.flatten if bounds
           if sw_lat && sw_lng && ne_lat && ne_lng
             where(Geocoder::Sql.within_bounding_box(
@@ -156,13 +157,13 @@ module Geocoder::Store
           conditions = [bounding_box_conditions + " AND (#{distance}) " + c] + a
         end
         {
-          :select => select_clause(options[:select],
+          select: select_clause(options[:select],
                                    select_distance ? distance : nil,
                                    select_bearing ? bearing : nil,
                                    distance_column,
                                    bearing_column),
-          :conditions => add_exclude_condition(conditions, options[:exclude]),
-          :order => options.include?(:order) ? options[:order] : "#{distance_column} ASC"
+          conditions: add_exclude_condition(conditions, options[:exclude]),
+          order: options.include?(:order) ? options[:order] : "#{distance_column} ASC"
         }
       end
 
@@ -176,7 +177,7 @@ module Geocoder::Store
           method_prefix + "_distance",
           latitude, longitude,
           full_column_name(options[:latitude] || geocoder_options[:latitude]),
-          full_column_name(options[:longitude]|| geocoder_options[:longitude]),
+          full_column_name(options[:longitude] || geocoder_options[:longitude]),
           options
         )
       end
@@ -195,7 +196,7 @@ module Geocoder::Store
             method_prefix + "_bearing",
             latitude, longitude,
             full_column_name(options[:latitude] || geocoder_options[:latitude]),
-            full_column_name(options[:longitude]|| geocoder_options[:longitude]),
+            full_column_name(options[:longitude] || geocoder_options[:longitude]),
             options
           )
         end
@@ -247,7 +248,7 @@ module Geocoder::Store
       def using_sqlite_with_extensions?
         connection.adapter_name.match(/sqlite/i) &&
           defined?(::SqliteExt) &&
-          %W(MOD POWER SQRT PI SIN COS ASIN ATAN2).all?{ |fn_name|
+          %W(MOD POWER SQRT PI SIN COS ASIN ATAN2).all? { |fn_name|
             connection.raw_connection.function_created?(fn_name)
           }
       end
@@ -286,7 +287,7 @@ module Geocoder::Store
     #
     def nearbys(radius = 20, options = {})
       return nil unless geocoded?
-      options.merge!(:exclude => self) unless send(self.class.primary_key).nil?
+      options.merge!(exclude: self) unless send(self.class.primary_key).nil?
       self.class.near(self, radius, options)
     end
 
@@ -295,9 +296,9 @@ module Geocoder::Store
     # (or other as specified in +geocoded_by+). Returns coordinates (array).
     #
     def geocode
-      do_lookup(false) do |o,rs|
+      do_lookup(false) do |o, rs|
         if r = rs.first
-          unless r.latitude.nil? or r.longitude.nil?
+          unless r.latitude.nil? || r.longitude.nil?
             o.__send__  "#{self.class.geocoder_options[:latitude]}=",  r.latitude
             o.__send__  "#{self.class.geocoder_options[:longitude]}=", r.longitude
           end
@@ -313,7 +314,7 @@ module Geocoder::Store
     # in +reverse_geocoded_by+). Returns address (string).
     #
     def reverse_geocode
-      do_lookup(true) do |o,rs|
+      do_lookup(true) do |o, rs|
         if r = rs.first
           unless r.address.nil?
             o.__send__ "#{self.class.geocoder_options[:fetched_address]}=", r.address

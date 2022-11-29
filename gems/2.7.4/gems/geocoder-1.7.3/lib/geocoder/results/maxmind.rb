@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/results/base'
 
 module Geocoder::Result
@@ -8,12 +9,12 @@ module Geocoder::Result
     #
     def self.field_names
       {
-        :country => [
+        country: [
           :country_code,
           :error
         ],
 
-        :city => [
+        city: [
           :country_code,
           :region_code,
           :city_name,
@@ -22,7 +23,7 @@ module Geocoder::Result
           :error
         ],
 
-        :city_isp_org => [
+        city_isp_org: [
           :country_code,
           :region_code,
           :city_name,
@@ -36,7 +37,7 @@ module Geocoder::Result
           :error
         ],
 
-        :omni => [
+        omni: [
           :country_code,
           :country_name,
           :region_code,

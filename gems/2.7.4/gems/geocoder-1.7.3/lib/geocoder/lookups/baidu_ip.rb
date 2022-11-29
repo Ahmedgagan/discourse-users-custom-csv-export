@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/baidu'
 require 'geocoder/results/baidu_ip'
 
@@ -20,9 +21,9 @@ module Geocoder::Lookup
 
     def query_url_params(query)
       {
-        :ip => query.sanitized_text,
-        :ak => configuration.api_key,
-        :coor => "bd09ll"
+        ip: query.sanitized_text,
+        ak: configuration.api_key,
+        coor: "bd09ll"
       }.merge(super)
     end
 

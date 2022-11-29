@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require 'geocoder/results/maxmind_geoip2'
 
@@ -28,8 +29,8 @@ module Geocoder::Lookup
     # Return the name of the configured service, or raise an exception.
     #
     def configured_service!
-      if s = configuration[:service] and services.include?(s) and configuration[:basic_auth][:user] and configuration[:basic_auth][:password]
-        return s
+      if (s = configuration[:service]) && services.include?(s) && configuration[:basic_auth][:user] && configuration[:basic_auth][:password]
+        s
       else
         raise(
           Geocoder::ConfigurationError, "When using MaxMind GeoIP2 you must specify a service and credentials: Geocoder.configure(maxmind_geoip2: {service: ..., basic_auth: {user: ..., password: ...}}), where service is one of: #{services.inspect}"
@@ -64,7 +65,7 @@ module Geocoder::Lookup
           Geocoder.log(:warn, "MaxMind GeoIP2 Geocoding API error: #{doc['code']} (#{doc['error']}).")
         end
       end
-      return []
+      []
     end
   end
 end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require "geocoder/results/mapbox"
 
@@ -26,13 +27,13 @@ module Geocoder::Lookup
     end
 
     def query_url_params(query)
-      {access_token: configuration.api_key}.merge(super(query))
+      { access_token: configuration.api_key }.merge(super(query))
     end
 
     def mapbox_search_term(query)
       require 'cgi' unless defined?(CGI) && defined?(CGI.escape)
       if query.reverse_geocode?
-        lat,lon = query.coordinates
+        lat, lon = query.coordinates
         "#{CGI.escape lon},#{CGI.escape lat}"
       else
         # truncate at first semicolon so Mapbox doesn't go into batch mode
@@ -52,7 +53,7 @@ module Geocoder::Lookup
     def sort_relevant_feature(features)
       # Sort by descending relevance; Favor original order for equal relevance (eg occurs for reverse geocoding)
       features.sort_by do |feature|
-        [feature["relevance"],-features.index(feature)]
+        [feature["relevance"], -features.index(feature)]
       end.reverse
     end
   end

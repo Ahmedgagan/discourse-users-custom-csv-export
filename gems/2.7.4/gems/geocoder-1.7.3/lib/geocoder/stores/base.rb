@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Geocoder
   module Store
     module Base
@@ -13,7 +14,7 @@ module Geocoder
       # Coordinates [lat,lon] of the object.
       #
       def to_coordinates
-        [:latitude, :longitude].map{ |i| send self.class.geocoder_options[i] }
+        [:latitude, :longitude].map { |i| send self.class.geocoder_options[i] }
       end
 
       ##
@@ -26,7 +27,7 @@ module Geocoder
         units ||= self.class.geocoder_options[:units]
         return nil unless geocoded?
         Geocoder::Calculations.distance_between(
-          to_coordinates, point, :units => units)
+          to_coordinates, point, units: units)
       end
 
       alias_method :distance_from, :distance_to
@@ -82,9 +83,9 @@ module Geocoder
       #
       def do_lookup(reverse = false)
         options = self.class.geocoder_options
-        if reverse and options[:reverse_geocode]
+        if reverse && options[:reverse_geocode]
           query = to_coordinates
-        elsif !reverse and options[:geocode]
+        elsif !reverse && options[:geocode]
           query = send(options[:user_address])
         else
           return

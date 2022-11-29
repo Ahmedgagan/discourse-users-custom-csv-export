@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'openssl'
 require 'base64'
 require 'geocoder/lookups/google'
@@ -30,16 +31,16 @@ module Geocoder::Lookup
     end
 
     def cache_key_params(query)
-      query_url_google_params(query).merge(super).reject do |k,v|
+      query_url_google_params(query).merge(super).reject do |k, v|
         [:key, :client, :channel].include?(k)
       end
     end
 
     def query_url_params(query)
       query_url_google_params(query).merge(super).merge(
-        :key => nil, # don't use param inherited from Google lookup
-        :client => configuration.api_key[1],
-        :channel => configuration.api_key[2]
+        key: nil, # don't use param inherited from Google lookup
+        client: configuration.api_key[1],
+        channel: configuration.api_key[2]
       )
     end
 

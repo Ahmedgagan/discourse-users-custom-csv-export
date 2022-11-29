@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require 'geocoder/results/ipregistry'
 
@@ -51,7 +52,7 @@ module Geocoder::Lookup
       if (error = doc['error'])
         code = error['code']
         msg = error['message']
-        raise_error(ERROR_CODES[code], msg ) || Geocoder.log(:warn, "Ipregistry API error: #{msg}")
+        raise_error(ERROR_CODES[code], msg) || Geocoder.log(:warn, "Ipregistry API error: #{msg}")
         return []
       end
       [doc]
@@ -59,7 +60,7 @@ module Geocoder::Lookup
 
     def reserved_result(ip)
       {
-        "ip"           => ip,
+        "ip" => ip,
         "country_name" => "Reserved",
         "country_code" => "RD"
       }

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require "geocoder/configuration"
 require "geocoder/logger"
 require "geocoder/kernel_logger"

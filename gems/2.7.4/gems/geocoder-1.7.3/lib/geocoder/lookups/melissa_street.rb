@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require "geocoder/results/melissa_street"
 
@@ -16,7 +17,7 @@ module Geocoder::Lookup
           Geocoder.log(:warn, "Melissa service error: invalid API key.")
       end
 
-      return doc["Records"]
+      doc["Records"]
     end
 
     private # ---------------------------------------------------------------

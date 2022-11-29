@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require "geocoder/results/geocodio"
 
@@ -11,7 +12,7 @@ module Geocoder::Lookup
     def results(query)
       return [] unless doc = fetch_data(query)
       return doc["results"] if doc['error'].nil?
-      
+
       if doc['error'] == 'Invalid API key'
         raise_error(Geocoder::InvalidApiKey) ||
           Geocoder.log(:warn, "Geocodio service error: invalid API key.")
@@ -34,8 +35,8 @@ module Geocoder::Lookup
 
     def query_url_params(query)
       {
-        :api_key => configuration.api_key,
-        :q => query.sanitized_text
+        api_key: configuration.api_key,
+        q: query.sanitized_text
       }.merge(super)
     end
   end

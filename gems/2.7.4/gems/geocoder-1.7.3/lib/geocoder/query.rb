@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Geocoder
   class Query
     attr_accessor :text, :options
@@ -32,7 +33,7 @@ module Geocoder
     # appropriate to the Query text.
     #
     def lookup
-      if !options[:street_address] and (options[:ip_address] or ip_address?)
+      if !options[:street_address] && (options[:ip_address] || ip_address?)
         name = options[:ip_lookup] || Configuration.ip_lookup || Geocoder::Lookup.ip_services.first
       else
         name = options[:lookup] || Configuration.lookup || Geocoder::Lookup.street_services.first

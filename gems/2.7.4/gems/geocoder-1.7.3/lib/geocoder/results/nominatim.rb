@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/results/base'
 
 module Geocoder::Result
@@ -5,7 +6,7 @@ module Geocoder::Result
 
     def poi
       return address_data[place_type] if address_data.key?(place_type)
-      return nil
+      nil
     end
 
     def house_number
@@ -20,14 +21,14 @@ module Geocoder::Result
       %w[road pedestrian highway].each do |key|
         return address_data[key] if address_data.key?(key)
       end
-      return nil
+      nil
     end
 
     def city
       %w[city town village hamlet].each do |key|
         return address_data[key] if address_data.key?(key)
       end
-      return nil
+      nil
     end
 
     def village

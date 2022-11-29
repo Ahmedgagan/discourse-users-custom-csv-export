@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # This class implements an ActiveJob job for performing reverse-geocoding
 # asynchronously. Example usage:
 

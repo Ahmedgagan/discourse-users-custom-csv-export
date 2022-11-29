@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require 'geocoder/results/ipapi_com'
 
@@ -41,25 +42,25 @@ module Geocoder::Lookup
 
       if doc["message"] == "invalid key"
         raise_error(Geocoder::InvalidApiKey) || Geocoder.log(:warn, "Invalid API key.")
-        return []
+        []
       else
-        return [doc]
+        [doc]
       end
     end
 
     def reserved_result(query)
       {
-        "message"      => "reserved range",
-        "query"        => query,
-        "status"       => "fail",
-        "ip"           => query,
-        "city"         => "",
-        "region_code"  => "",
-        "region_name"  => "",
-        "metrocode"    => "",
-        "zipcode"      => "",
-        "latitude"     => "0",
-        "longitude"    => "0",
+        "message" => "reserved range",
+        "query" => query,
+        "status" => "fail",
+        "ip" => query,
+        "city" => "",
+        "region_code" => "",
+        "region_name" => "",
+        "metrocode" => "",
+        "zipcode" => "",
+        "latitude" => "0",
+        "longitude" => "0",
         "country_name" => "Reserved",
         "country_code" => "RD"
       }
@@ -67,7 +68,7 @@ module Geocoder::Lookup
 
     def invalid_key_result
       {
-        "message"      => "invalid key"
+        "message" => "invalid key"
       }
     end
 

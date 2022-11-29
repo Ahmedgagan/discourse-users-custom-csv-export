@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Geocoder
   class EastingNorthing
     attr_reader :easting, :northing, :lat_lng
@@ -12,7 +13,7 @@ module Geocoder
     private
 
     def to_osgb_36
-      osgb_fo  = 0.9996012717
+      osgb_fo = 0.9996012717
       northing0 = -100_000.0
       easting0 = 400_000.0
       phi0 = deg_to_rad(49.0)

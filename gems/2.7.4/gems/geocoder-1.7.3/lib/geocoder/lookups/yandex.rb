@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require "geocoder/results/yandex"
 
@@ -25,7 +26,7 @@ module Geocoder::Lookup
     def results(query)
       return [] unless doc = fetch_data(query)
       if err = doc['error']
-        if err["status"] == 401 and err["message"] == "invalid key"
+        if (err["status"] == 401) && (err["message"] == "invalid key")
           raise_error(Geocoder::InvalidApiKey) || Geocoder.log(:warn, "Invalid API key.")
         else
           Geocoder.log(:warn, "Yandex Geocoding API error: #{err['status']} (#{err['message']}).")
@@ -33,10 +34,10 @@ module Geocoder::Lookup
         return []
       end
       if doc = doc['response']['GeoObjectCollection']
-        return doc['featureMember'].to_a
+        doc['featureMember'].to_a
       else
         Geocoder.log(:warn, "Yandex Geocoding API error: unexpected response format.")
-        return []
+        []
       end
     end
 
@@ -47,13 +48,13 @@ module Geocoder::Lookup
         q = query.sanitized_text
       end
       params = {
-        :geocode => q,
-        :format => "json",
-        :lang => "#{query.language || configuration.language}", # supports ru, uk, be, default -> ru
-        :apikey => configuration.api_key
+        geocode: q,
+        format: "json",
+        lang: "#{query.language || configuration.language}", # supports ru, uk, be, default -> ru
+        apikey: configuration.api_key
       }
       unless (bounds = query.options[:bounds]).nil?
-        params[:bbox] = bounds.map{ |point| "%f,%f" % point }.join('~')
+        params[:bbox] = bounds.map { |point| "%f,%f" % point }.join('~')
       end
       params.merge(super)
     end

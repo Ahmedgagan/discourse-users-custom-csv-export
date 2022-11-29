@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require "geocoder/lookups/test"
 
 module Geocoder
@@ -108,7 +109,6 @@ module Geocoder
       @services[name]
     end
 
-
     private # -----------------------------------------------------------------
 
     ##
@@ -130,7 +130,7 @@ module Geocoder
     # Convert an "underscore" version of a name into a "class" version.
     #
     def classify_name(filename)
-      filename.to_s.split("_").map{ |i| i[0...1].upcase + i[1..-1] }.join
+      filename.to_s.split("_").map { |i| i[0...1].upcase + i[1..-1] }.join
     end
   end
 end

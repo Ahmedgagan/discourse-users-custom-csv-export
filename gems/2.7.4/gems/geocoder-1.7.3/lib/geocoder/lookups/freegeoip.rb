@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require 'geocoder/results/freegeoip'
 
@@ -40,14 +41,14 @@ module Geocoder::Lookup
 
     def reserved_result(ip)
       {
-        "ip"           => ip,
-        "city"         => "",
-        "region_code"  => "",
-        "region_name"  => "",
-        "metro_code"    => "",
-        "zip_code"      => "",
-        "latitude"     => "0",
-        "longitude"    => "0",
+        "ip" => ip,
+        "city" => "",
+        "region_code" => "",
+        "region_name" => "",
+        "metro_code" => "",
+        "zip_code" => "",
+        "latitude" => "0",
+        "longitude" => "0",
         "country_name" => "Reserved",
         "country_code" => "RD"
       }

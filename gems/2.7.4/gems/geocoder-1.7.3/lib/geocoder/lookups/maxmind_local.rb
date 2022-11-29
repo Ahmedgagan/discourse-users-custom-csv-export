@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'ipaddr'
 require 'geocoder/lookups/base'
 require 'geocoder/results/maxmind_local'
@@ -53,7 +54,7 @@ module Geocoder::Lookup
     end
 
     def encode_hash(hash, encoding = "UTF-8")
-      hash.inject({}) do |h,i|
+      hash.inject({}) do |h, i|
         h[i[0]] = i[1].is_a?(String) ? i[1].encode(encoding) : i[1]
         h
       end

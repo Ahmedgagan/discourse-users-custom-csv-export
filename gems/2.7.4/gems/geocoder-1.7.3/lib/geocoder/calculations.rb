@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Geocoder
   module Calculations
     extend self
@@ -29,7 +30,7 @@ module Geocoder
     # Radius of the Earth, in kilometers.
     # Value taken from: http://en.wikipedia.org/wiki/Earth_radius
     #
-    EARTH_RADII = {km: 6371.0}
+    EARTH_RADII = { km: 6371.0 }
     EARTH_RADII[:mi] = EARTH_RADII[:km] * KM_IN_MI
     EARTH_RADII[:nm] = EARTH_RADII[:km] * KM_IN_NM
 
@@ -45,7 +46,7 @@ module Geocoder
       args.each do |a|
         # note that Float::NAN != Float::NAN
         # still, this could probably be improved:
-        return false if (!a.is_a?(Numeric) or a.to_s == "NaN")
+        return false if (!a.is_a?(Numeric) || (a.to_s == "NaN"))
       end
       true
     end
@@ -96,7 +97,7 @@ module Geocoder
 
       a = (Math.sin(dlat / 2))**2 + Math.cos(point1[0]) *
           (Math.sin(dlon / 2))**2 * Math.cos(point2[0])
-      c = 2 * Math.atan2( Math.sqrt(a), Math.sqrt(1-a))
+      c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
       c * earth_radius(options[:units])
     end
 
@@ -144,7 +145,7 @@ module Geocoder
             Math.sin(point1[0]) * Math.cos(point2[0]) * Math.cos(dlon)
       end
 
-      bearing = Math.atan2(x,y)
+      bearing = Math.atan2(x, y)
       # Answer is in radians counterclockwise from due east.
       # Convert to degrees clockwise from due north:
       (90 - to_degrees(bearing) + 360) % 360
@@ -167,7 +168,7 @@ module Geocoder
     def geographic_center(points)
 
       # convert objects to [lat,lon] arrays and convert degrees to radians
-      coords = points.map{ |p| to_radians(extract_coordinates(p)) }
+      coords = points.map { |p| to_radians(extract_coordinates(p)) }
 
       # convert to Cartesian coordinates
       x = []; y = []; z = []
@@ -178,8 +179,8 @@ module Geocoder
       end
 
       # compute average coordinate values
-      xa, ya, za = [x,y,z].map do |c|
-        c.inject(0){ |tot,i| tot += i } / c.size.to_f
+      xa, ya, za = [x, y, z].map do |c|
+        c.inject(0) { |tot, i| tot += i } / c.size.to_f
       end
 
       # convert back to latitude/longitude
@@ -208,7 +209,7 @@ module Geocoder
     #   Use Geocoder.configure(:units => ...) to configure default units.
     #
     def bounding_box(point, radius, options = {})
-      lat,lon = extract_coordinates(point)
+      lat, lon = extract_coordinates(point)
       radius  = radius.to_f
       [
         lat - (radius / latitude_degree_distance(options[:units])),
@@ -279,11 +280,11 @@ module Geocoder
       heading = to_radians(heading)
       distance = distance.to_f
 
-      end_lat = Math.asin(Math.sin(lat)*Math.cos(distance/radius) +
-                    Math.cos(lat)*Math.sin(distance/radius)*Math.cos(heading))
+      end_lat = Math.asin(Math.sin(lat) * Math.cos(distance / radius) +
+                    Math.cos(lat) * Math.sin(distance / radius) * Math.cos(heading))
 
-      end_lon = lon+Math.atan2(Math.sin(heading)*Math.sin(distance/radius)*Math.cos(lat),
-                    Math.cos(distance/radius)-Math.sin(lat)*Math.sin(end_lat))
+      end_lon = lon + Math.atan2(Math.sin(heading) * Math.sin(distance / radius) * Math.cos(lat),
+                    Math.cos(distance / radius) - Math.sin(lat) * Math.sin(end_lat))
 
       to_degrees [end_lat, end_lon]
     end
@@ -298,7 +299,7 @@ module Geocoder
       if args.size == 1
         args.first * (Math::PI / 180)
       else
-        args.map{ |i| to_radians(i) }
+        args.map { |i| to_radians(i) }
       end
     end
 
@@ -312,7 +313,7 @@ module Geocoder
       if args.size == 1
         (args.first * 180.0) / Math::PI
       else
-        args.map{ |i| to_degrees(i) }
+        args.map { |i| to_degrees(i) }
       end
     end
 
@@ -399,7 +400,7 @@ module Geocoder
       when Array
         if point.size == 2
           lat, lon = point
-          if !lat.nil? && lat.respond_to?(:to_f) and
+          if !lat.nil? && lat.respond_to?(:to_f) &&
             !lon.nil? && lon.respond_to?(:to_f)
           then
             return [ lat.to_f, lon.to_f ]

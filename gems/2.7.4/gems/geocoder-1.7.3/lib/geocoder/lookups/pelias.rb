@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require 'geocoder/results/pelias'
 
@@ -46,14 +47,14 @@ module Geocoder::Lookup
         message = error.fetch('type', 'Unknown Error') + ': ' + error.fetch('message', 'No message')
         log_message = 'Pelias Geocoding API error - ' + message
         case doc['meta']['status_code']
-          when '200'
-            # nothing to see here
-          when '403'
-            raise_error(Geocoder::RequestDenied, message) || Geocoder.log(:warn, log_message)
-          when '429'
-            raise_error(Geocoder::OverQueryLimitError, message) || Geocoder.log(:warn, log_message)
+        when '200'
+        # nothing to see here
+        when '403'
+          raise_error(Geocoder::RequestDenied, message) || Geocoder.log(:warn, log_message)
+        when '429'
+          raise_error(Geocoder::OverQueryLimitError, message) || Geocoder.log(:warn, log_message)
           else
-            raise_error(Geocoder::Error, message) || Geocoder.log(:warn, log_message)
+          raise_error(Geocoder::Error, message) || Geocoder.log(:warn, log_message)
         end
       end
 

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/cache_stores/base'
 
 module Geocoder::CacheStore
@@ -29,6 +30,8 @@ module Geocoder::CacheStore
 
     private # ----------------------------------------------------------------
 
-    def expire; @expiration; end
+    def expire
+      @expiration
+    end
   end
 end

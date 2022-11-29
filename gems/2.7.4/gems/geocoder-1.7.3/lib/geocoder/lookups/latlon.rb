@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require 'geocoder/results/latlon'
 
@@ -42,14 +43,14 @@ module Geocoder::Lookup
     def query_url_params(query)
       if query.reverse_geocode?
         {
-          :token => configuration.api_key,
-          :lat => query.coordinates[0],
-          :lon => query.coordinates[1]
+          token: configuration.api_key,
+          lat: query.coordinates[0],
+          lon: query.coordinates[1]
         }.merge(super)
       else
         {
-          :token => configuration.api_key,
-          :address => query.sanitized_text
+          token: configuration.api_key,
+          address: query.sanitized_text
         }.merge(super)
       end
     end

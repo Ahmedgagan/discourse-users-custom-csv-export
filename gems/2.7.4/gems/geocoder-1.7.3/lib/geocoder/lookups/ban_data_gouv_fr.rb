@@ -1,4 +1,5 @@
 # encoding: utf-8
+# frozen_string_literal: true
 
 require 'geocoder/lookups/base'
 require 'geocoder/results/ban_data_gouv_fr'
@@ -26,7 +27,7 @@ module Geocoder::Lookup
     end
 
     def results(query)
-      if doc = fetch_data(query) and any_result?(doc)
+      if (doc = fetch_data(query)) && any_result?(doc)
         [doc]
       else
         []
@@ -121,7 +122,7 @@ module Geocoder::Lookup
     end
 
     def autocomplete_param_is_valid?(param)
-      [0,1].include?(param.to_i)
+      [0, 1].include?(param.to_i)
     end
 
     def type_param_is_valid?(param)

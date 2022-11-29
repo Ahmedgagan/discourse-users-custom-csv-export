@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/results/base'
 
 module Geocoder::Result
@@ -40,9 +41,9 @@ module Geocoder::Result
           ['country_code2', ''],
           ['country_code3', ''],
           ['country_name', ''],
-          ['country_capital',''],
-          ['district',''],
-          ['state_prov',''],
+          ['country_capital', ''],
+          ['district', ''],
+          ['state_prov', ''],
           ['city', ''],
           ['zipcode', ''],
           ['time_zone', {}],

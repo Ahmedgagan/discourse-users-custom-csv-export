@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'net/http'
 require 'net/https'
 require 'uri'
@@ -30,7 +31,7 @@ module Geocoder
       #
       def handle
         str = self.class.to_s
-        str[str.rindex(':')+1..-1].gsub(/([a-z\d]+)([A-Z])/,'\1_\2').downcase.to_sym
+        str[str.rindex(':') + 1..-1].gsub(/([a-z\d]+)([A-Z])/, '\1_\2').downcase.to_sym
       end
 
       ##
@@ -43,7 +44,7 @@ module Geocoder
       #
       def search(query, options = {})
         query = Geocoder::Query.new(query, options) unless query.is_a?(Geocoder::Query)
-        results(query).map{ |r|
+        results(query).map { |r|
           result = result_class.new(r)
           result.cache_hit = @cache_hit if cache
           result
@@ -153,7 +154,7 @@ module Geocoder
 
       def url_query_string(query)
         hash_to_query(
-          query_url_params(query).reject{ |key,value| value.nil? }
+          query_url_params(query).reject { |key, value| value.nil? }
         )
       end
 
@@ -169,7 +170,7 @@ module Geocoder
 
       def cache_key_params(query)
         # omit api_key and token because they may vary among requests
-        query_url_params(query).reject do |key,value|
+        query_url_params(query).reject do |key, value|
           key.to_s.match(/(key|token)/)
         end
       end
@@ -187,7 +188,7 @@ module Geocoder
       #
       def raise_error(error, message = nil)
         exceptions = configuration.always_raise
-        if exceptions == :all or exceptions.include?( error.is_a?(Class) ? error : error.class )
+        if (exceptions == :all) || exceptions.include?(error.is_a?(Class) ? error : error.class)
           raise error, message
         else
           false
@@ -248,7 +249,7 @@ module Geocoder
       #
       def fetch_raw_data(query)
         key = cache_key(query)
-        if cache and body = cache[key]
+        if cache && (body = cache[key])
           @cache_hit = true
         else
           check_api_key_configuration!(query)
@@ -268,7 +269,7 @@ module Geocoder
             end
           end
 
-          if cache and valid_response?(response)
+          if cache && valid_response?(response)
             cache[key] = body
           end
           @cache_hit = false
@@ -305,7 +306,7 @@ module Geocoder
         http_client.start(uri.host, uri.port, use_ssl: use_ssl?, open_timeout: configuration.timeout, read_timeout: configuration.timeout) do |client|
           configure_ssl!(client) if use_ssl?
           req = Net::HTTP::Get.new(uri.request_uri, configuration.http_headers)
-          if configuration.basic_auth[:user] and configuration.basic_auth[:password]
+          if configuration.basic_auth[:user] && configuration.basic_auth[:password]
             req.basic_auth(
               configuration.basic_auth[:user],
               configuration.basic_auth[:password]
@@ -347,8 +348,8 @@ module Geocoder
       #
       def hash_to_query(hash)
         require 'cgi' unless defined?(CGI) && defined?(CGI.escape)
-        hash.collect{ |p|
-          p[1].nil? ? nil : p.map{ |i| CGI.escape i.to_s } * '='
+        hash.collect { |p|
+          p[1].nil? ? nil : p.map { |i| CGI.escape i.to_s } * '='
         }.compact.sort * '&'
       end
     end

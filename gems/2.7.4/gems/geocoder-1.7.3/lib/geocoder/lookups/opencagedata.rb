@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require 'geocoder/results/opencagedata'
 
@@ -31,21 +32,21 @@ module Geocoder::Lookup
         raise_error(Geocoder::InvalidApiKey, messages) ||
           Geocoder.log(:warn, "Opencagedata Geocoding API error: #{messages}")
       when 402 # Quata Exceeded
-          raise_error(Geocoder::OverQueryLimitError, messages) ||
-          Geocoder.log(:warn, "Opencagedata Geocoding API error: #{messages}")
+        raise_error(Geocoder::OverQueryLimitError, messages) ||
+        Geocoder.log(:warn, "Opencagedata Geocoding API error: #{messages}")
       when 500 # Unknown error
         raise_error(Geocoder::Error, messages) ||
           Geocoder.log(:warn, "Opencagedata Geocoding API error: #{messages}")
       end
 
-      return doc["results"]
+      doc["results"]
     end
 
     def query_url_params(query)
       params = {
-        :q => query.sanitized_text,
-        :key => configuration.api_key,
-        :language => (query.language || configuration.language)
+        q: query.sanitized_text,
+        key: configuration.api_key,
+        language: (query.language || configuration.language)
       }.merge(super)
 
       [:abbrv, :countrycode, :min_confidence, :no_dedupe, :no_annotations, :no_record, :limit].each do |option|
@@ -55,7 +56,7 @@ module Geocoder::Lookup
       end
 
       unless (bounds = query.options[:bounds]).nil?
-        params[:bounds] = bounds.map{ |point| "%f,%f" % point }.join(',')
+        params[:bounds] = bounds.map { |point| "%f,%f" % point }.join(',')
       end
 
       params

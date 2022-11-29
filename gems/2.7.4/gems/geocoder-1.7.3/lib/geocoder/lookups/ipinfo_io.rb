@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require 'geocoder/results/ipinfo_io'
 
@@ -20,7 +21,7 @@ module Geocoder::Lookup
       # don't look up a loopback or private address, just return the stored result
       return [reserved_result(query.text)] if query.internal_ip_address?
 
-      if !(doc = fetch_data(query)).is_a?(Hash) or doc['error']
+      if !(doc = fetch_data(query)).is_a?(Hash) || doc['error']
         []
       else
         [doc]

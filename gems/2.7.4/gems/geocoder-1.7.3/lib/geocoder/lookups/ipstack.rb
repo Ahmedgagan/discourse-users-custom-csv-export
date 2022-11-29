@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require 'geocoder/results/ipstack'
 
@@ -42,7 +43,7 @@ module Geocoder::Lookup
       if error = doc['error']
         code = error['code']
         msg = error['info']
-        raise_error(ERROR_CODES[code], msg ) || Geocoder.log(:warn, "Ipstack Geocoding API error: #{msg}")
+        raise_error(ERROR_CODES[code], msg) || Geocoder.log(:warn, "Ipstack Geocoding API error: #{msg}")
         return []
       end
       [doc]
@@ -50,7 +51,7 @@ module Geocoder::Lookup
 
     def reserved_result(ip)
       {
-        "ip"           => ip,
+        "ip" => ip,
         "country_name" => "Reserved",
         "country_code" => "RD"
       }

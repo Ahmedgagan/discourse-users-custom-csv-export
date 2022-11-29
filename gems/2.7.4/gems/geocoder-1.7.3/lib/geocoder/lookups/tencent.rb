@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require "geocoder/results/tencent"
 
@@ -44,7 +45,7 @@ module Geocoder::Lookup
         raise_error(Geocoder::RequestDenied, "request denied.") ||
           Geocoder.log(:warn, "#{name} Geocoding API error: request source is not authorized.")
       end
-      return []
+      []
     end
 
     def query_url_params(query)

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require 'geocoder/results/postcode_anywhere_uk'
 
@@ -42,8 +43,8 @@ module Geocoder::Lookup
 
     def query_url_params(query)
       {
-        :location => query.sanitized_text,
-        :key => configuration.api_key
+        location: query.sanitized_text,
+        key: configuration.api_key
       }.merge(super)
     end
   end

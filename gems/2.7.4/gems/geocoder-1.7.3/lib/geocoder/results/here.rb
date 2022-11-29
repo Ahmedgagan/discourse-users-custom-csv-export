@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/results/base'
 
 module Geocoder::Result
@@ -17,19 +18,19 @@ module Geocoder::Result
       fail unless d = @data['Location']['DisplayPosition']
       [d['Latitude'].to_f, d['Longitude'].to_f]
     end
-    
+
     def route
       address_data['Street']
     end
-    
+
     def street_number
       address_data['HouseNumber']
-    end  
+    end
 
     def state
       fail unless d = address_data['AdditionalData']
-      if v = d.find{|ad| ad['key']=='StateName'}
-        return v['value']
+      if v = d.find { |ad| ad['key'] == 'StateName' }
+        v['value']
       end
     end
 
@@ -55,8 +56,8 @@ module Geocoder::Result
 
     def country
       fail unless d = address_data['AdditionalData']
-      if v = d.find{|ad| ad['key']=='CountryName'}
-        return v['value']
+      if v = d.find { |ad| ad['key'] == 'CountryName' }
+        v['value']
       end
     end
 

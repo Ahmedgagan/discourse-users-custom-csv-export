@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/results/base'
 
 module Geocoder::Result
@@ -7,7 +8,7 @@ module Geocoder::Result
       %w[stadium bus_stop tram_stop].each do |key|
         return @data['components'][key] if @data['components'].key?(key)
       end
-      return nil
+      nil
     end
 
     def house_number
@@ -22,14 +23,14 @@ module Geocoder::Result
       %w[road pedestrian highway].each do |key|
         return @data['components'][key] if @data['components'].key?(key)
       end
-      return nil
+      nil
     end
 
     def city
       %w[city town village hamlet].each do |key|
         return @data['components'][key] if @data['components'].key?(key)
       end
-      return nil
+      nil
     end
 
     def village
@@ -85,7 +86,7 @@ module Geocoder::Result
     end
 
     def self.response_attributes
-      %w[boundingbox license 
+      %w[boundingbox license
         formatted stadium]
     end
 

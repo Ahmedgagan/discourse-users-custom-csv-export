@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'cgi'
 require 'geocoder/lookups/base'
 require 'geocoder/results/osmnames'
@@ -40,7 +41,7 @@ module Geocoder::Lookup
         raise_error(Geocoder::InvalidRequest, error) ||
           Geocoder.log(:warn, "OSMNames Geocoding API error: #{error}")
       else
-        return doc['results']
+        doc['results']
       end
     end
 

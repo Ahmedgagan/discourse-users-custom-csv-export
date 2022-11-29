@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require "geocoder/lookups/google"
 require "geocoder/results/google_places_search"
 
@@ -44,7 +45,7 @@ module Geocoder
 
       def default_fields
         legacy = %w[id reference]
-        basic = %w[business_status formatted_address geometry icon name 
+        basic = %w[business_status formatted_address geometry icon name
           photos place_id plus_code types]
         contact = %w[opening_hours]
         atmosphere = %W[price_level rating user_ratings_total]

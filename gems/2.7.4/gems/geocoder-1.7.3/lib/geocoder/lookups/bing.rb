@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require "geocoder/results/bing"
 
@@ -38,7 +39,7 @@ module Geocoder::Lookup
 
       if doc['statusCode'] == 200
         return doc['resourceSets'].first['estimatedTotal'] > 0 ? doc['resourceSets'].first['resources'] : []
-      elsif doc['statusCode'] == 401 and doc["authenticationResultCode"] == "InvalidCredentials"
+      elsif (doc['statusCode'] == 401) && (doc["authenticationResultCode"] == "InvalidCredentials")
         raise_error(Geocoder::InvalidApiKey) || Geocoder.log(:warn, "Invalid Bing API key.")
       elsif doc['statusCode'] == 403
         raise_error(Geocoder::RequestDenied) || Geocoder.log(:warn, "Bing Geocoding API error: Forbidden Request")
@@ -48,7 +49,7 @@ module Geocoder::Lookup
       else
         Geocoder.log(:warn, "Bing Geocoding API error: #{doc['statusCode']} (#{doc['statusDescription']}).")
       end
-      return []
+      []
     end
 
     def query_url_params(query)

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # This class allows you to configure how Geocoder should treat errors that occur when
 # the cache is not available.
 # Configure it like this
@@ -14,7 +15,6 @@ class Geocoder::CacheBypass
     @target = target
     @bypass = bypass
   end
-
 
   def [](key)
     with_bypass { @target[key] }

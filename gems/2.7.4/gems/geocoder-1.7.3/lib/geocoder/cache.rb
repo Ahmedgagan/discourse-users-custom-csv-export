@@ -1,4 +1,5 @@
-Dir["#{__dir__}/cache_stores/*.rb"].each {|file| require file }
+# frozen_string_literal: true
+Dir["#{__dir__}/cache_stores/*.rb"].each { |file| require file }
 
 module Geocoder
   class Cache
@@ -33,7 +34,7 @@ module Geocoder
     def expire(url)
       if url == :all
         if store_service.respond_to?(:keys)
-          urls.each{ |u| expire(u) }
+          urls.each { |u| expire(u) }
         else
           raise(NoMethodError, "The Geocoder cache store must implement `#keys` for `expire(:all)` to work")
         end
@@ -42,10 +43,11 @@ module Geocoder
       end
     end
 
-
     private # ----------------------------------------------------------------
 
-    def store_service; @store_service; end
+    def store_service
+      @store_service
+    end
 
     ##
     # Array of keys with the currently configured prefix

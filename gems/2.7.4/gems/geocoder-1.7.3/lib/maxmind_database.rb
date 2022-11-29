@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'csv'
 require 'net/http'
 
@@ -21,7 +22,7 @@ module Geocoder
     end
 
     def insert(package, dir = "tmp")
-      data_files(package, dir).each do |filepath,table|
+      data_files(package, dir).each do |filepath, table|
         print "Resetting table #{table}..."
         ActiveRecord::Base.connection.execute("DELETE FROM #{table}")
         puts "done"
@@ -67,7 +68,7 @@ module Geocoder
 
     def insert_rows(table, headers, rows)
       value_strings = rows.map do |row|
-        "(" + row.map{ |col| sql_escaped_value(col) }.join(',') + ")"
+        "(" + row.map { |col| sql_escaped_value(col) }.join(',') + ")"
       end
       q = "INSERT INTO #{table} (#{headers.join(',')}) " +
         "VALUES #{value_strings.join(',')}"
@@ -86,7 +87,7 @@ module Geocoder
         files = Dir.glob(File.join(dir, "GeoLiteCity_*/*.csv"))[-2..-1].sort
         Hash[*files.zip(["maxmind_geolite_city_blocks", "maxmind_geolite_city_location"]).flatten]
       when :geolite_country_csv
-        {File.join(dir, "GeoIPCountryWhois.csv") => "maxmind_geolite_country"}
+        { File.join(dir, "GeoIPCountryWhois.csv") => "maxmind_geolite_country" }
       end
     end
 

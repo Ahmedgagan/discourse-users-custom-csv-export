@@ -1,10 +1,11 @@
+# frozen_string_literal: true
 require 'geocoder/results/base'
 
 module Geocoder::Result
   class Pointpin < Base
 
     def address
-      [ city_name, state, postal_code, country ].select{ |i| i.to_s != "" }.join(", ")
+      [ city_name, state, postal_code, country ].select { |i| i.to_s != "" }.join(", ")
     end
 
     def city

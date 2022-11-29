@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/results/base'
 
 module Geocoder::Result
@@ -55,4 +56,3 @@ module Geocoder::Result
     end
   end
 end
-

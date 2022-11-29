@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require "geocoder/results/google"
 
@@ -34,7 +35,7 @@ module Geocoder::Lookup
         if OpenSSL::SSL.const_defined?('OP_NO_COMPRESSION')
           options |= OpenSSL::SSL::OP_NO_COMPRESSION
         end
-        @ssl_context.set_params({options: options})
+        @ssl_context.set_params({ options: options })
       }
     end
 
@@ -63,13 +64,13 @@ module Geocoder::Lookup
         raise_error(Geocoder::InvalidRequest, doc['error_message']) ||
           Geocoder.log(:warn, "#{name} API error: invalid request (#{doc['error_message']}).")
       end
-      return []
+      []
     end
 
     def query_url_google_params(query)
       params = {
-        :sensor => "false",
-        :language => (query.language || configuration.language)
+        sensor: "false",
+        language: (query.language || configuration.language)
       }
       if query.options[:google_place_id]
         params[:place_id] = query.sanitized_text
@@ -77,7 +78,7 @@ module Geocoder::Lookup
         params[(query.reverse_geocode? ? :latlng : :address)] = query.sanitized_text
       end
       unless (bounds = query.options[:bounds]).nil?
-        params[:bounds] = bounds.map{ |point| "%f,%f" % point }.join('|')
+        params[:bounds] = bounds.map { |point| "%f,%f" % point }.join('|')
       end
       unless (region = query.options[:region]).nil?
         params[:region] = region
@@ -93,7 +94,7 @@ module Geocoder::Lookup
 
     def query_url_params(query)
       query_url_google_params(query).merge(
-        :key => configuration.api_key
+        key: configuration.api_key
       ).merge(super)
     end
   end

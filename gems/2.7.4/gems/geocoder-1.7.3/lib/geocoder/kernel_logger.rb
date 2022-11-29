@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Geocoder
   class KernelLogger
     include Singleton
@@ -5,14 +6,14 @@ module Geocoder
     def add(level, message)
       return unless log_message_at_level?(level)
       case level
-        when ::Logger::DEBUG, ::Logger::INFO
-          puts message
-        when ::Logger::WARN
-          warn message
-        when ::Logger::ERROR
-          raise message
-        when ::Logger::FATAL
-          fail message
+      when ::Logger::DEBUG, ::Logger::INFO
+        puts message
+      when ::Logger::WARN
+        warn message
+      when ::Logger::ERROR
+        raise message
+      when ::Logger::FATAL
+        fail message
       end
     end
 

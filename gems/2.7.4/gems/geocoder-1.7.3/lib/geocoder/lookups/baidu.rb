@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require "geocoder/results/baidu"
 
@@ -48,7 +49,7 @@ module Geocoder::Lookup
         raise_error(Geocoder::OverQueryLimitError, "over query limit.") ||
           Geocoder.log(:warn, "#{name} Geocoding API error: over query limit.")
       end
-      return []
+      []
     end
 
     def query_url_params(query)

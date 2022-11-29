@@ -1,10 +1,11 @@
+# frozen_string_literal: true
 require 'geocoder/results/base'
 
 module Geocoder::Result
   class Mapquest < Base
 
     def coordinates
-      %w[lat lng].map{ |l| @data["latLng"][l] }
+      %w[lat lng].map { |l| @data["latLng"][l] }
     end
 
     def city
@@ -42,7 +43,7 @@ module Geocoder::Result
     end
 
     def address
-      [street, city, state, postal_code, country].reject{|s| s.length == 0 }.join(", ")
+      [street, city, state, postal_code, country].reject { |s| s.length == 0 }.join(", ")
     end
   end
 end

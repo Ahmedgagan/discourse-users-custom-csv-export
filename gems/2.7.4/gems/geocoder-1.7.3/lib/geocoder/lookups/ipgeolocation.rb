@@ -1,6 +1,6 @@
+# frozen_string_literal: true
 require 'geocoder/lookups/base'
 require 'geocoder/results/ipgeolocation'
-
 
 module Geocoder::Lookup
   class Ipgeolocation < Base
@@ -42,7 +42,7 @@ module Geocoder::Lookup
 
     def reserved_result(ip)
       {
-          "ip"           => ip,
+          "ip" => ip,
           "country_name" => "Reserved",
           "country_code2" => "RD"
       }

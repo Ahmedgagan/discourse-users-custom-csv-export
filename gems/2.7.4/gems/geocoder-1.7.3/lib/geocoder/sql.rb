@@ -1,10 +1,11 @@
+# frozen_string_literal: true
 module Geocoder
   module Sql
     extend self
 
     ##
     # Distance calculation for use with a database that supports POWER(),
-    # SQRT(), PI(), and trigonometric functions SIN(), COS(), ASIN(), 
+    # SQRT(), PI(), and trigonometric functions SIN(), COS(), ASIN(),
     # ATAN2().
     #
     # Based on the excellent tutorial at:

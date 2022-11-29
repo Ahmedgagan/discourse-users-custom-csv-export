@@ -1,10 +1,11 @@
+# frozen_string_literal: true
 require 'geocoder/results/base'
 
 module Geocoder::Result
   class Baidu < Base
 
     def coordinates
-      ['lat', 'lng'].map{ |i| @data['location'][i] }
+      ['lat', 'lng'].map { |i| @data['location'][i] }
     end
 
     def province
