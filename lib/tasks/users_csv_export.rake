@@ -16,19 +16,24 @@ task "uce:users_csv_export" => :environment do |_, args|
 
   headers = ["Username", "IP", "Register IP" "location", "Last Seen", "Latest Post", "Post Count", "Multiple Accounts"]
 
-  CSV.open(file, 'w', write_headers: true, headers: headers) do |writer|
-    users.each do |user|
-      ip_addresses = User.where.not(id: 1).pluck(:ip_address, :registration_ip_address).flatten - [nil]
-      multiple_accounts = ip_addresses.include?(user.ip_address)
-      if user.posts.length > 0
-        last_post_url = user.posts.order(created_at: :desc).first.full_url
+  if users.length > 0
+    CSV.open(file, 'w', write_headers: true, headers: headers) do |writer|
+      users.each do |user|
+        ip_addresses = User.where.not(id: user.id).pluck(:ip_address, :registration_ip_address).flatten - [nil]
+
+        multiple_accounts = ip_addresses.include?(user.ip_address)
+        if user.posts.length > 0
+          last_post_url = user.posts.order(created_at: :desc).first.full_url
+        end
+
+        writer << [user.username, user.ip_address, user.registration_ip_address, user.custom_fields['nationalflag_iso'], user.last_seen_at, last_post_url, user.post_count, multiple_accounts]
       end
-
-      writer << [user.username, user.ip_address, user.registration_ip_address, user.custom_fields['nationalflag_iso'], user.last_seen_at, last_post_url, user.post_count, multiple_accounts]
     end
-  end
 
-  puts "Users CSV can be found here: #{file}"
+    puts "Users CSV can be found here: #{file}"
+  else
+    puts "No User Found!"
+  end
 end
 
 def uce_assign_country(user_ids = nil)
