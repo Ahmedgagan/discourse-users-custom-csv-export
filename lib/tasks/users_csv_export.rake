@@ -75,8 +75,6 @@ def uce_assign_country(user_ids = nil)
         user.custom_fields['nationalflag_iso'] = country.downcase
         user.save_custom_fields
       end
-
-      sleep(0.12)
     end
   end
 end
