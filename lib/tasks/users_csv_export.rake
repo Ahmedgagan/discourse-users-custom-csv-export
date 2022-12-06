@@ -4,6 +4,12 @@ desc "Export Users in a CSV file"
 task "uce:users_csv_export" => :environment do |_, args|
   user_ids = args.extras
 
+  if (user_ids[0].include?('-'))
+    range = user_ids[0].split("-")
+
+    user_ids = Array(range[0]..range[1])
+  end
+
   if user_ids && user_ids.length > 0
     uce_assign_country(user_ids)
     users = User.where(id: user_ids).where(id: 1..).order(:username)
